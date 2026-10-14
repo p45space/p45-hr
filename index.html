@@ -117,7 +117,7 @@ function render(){
   const m=S.me;if(!m)return;
   if(!m.registered){$nav.hidden=true;return $app.replaceChildren(vRegister())}
   if(!m.active){$nav.hidden=true;return $app.replaceChildren(h("div",{class:"center"},h("h2",null,"รอ HR อนุมัติ"),h("p",{class:"muted"},m.me.status==="ปิด"?"บัญชีนี้ถูกปิดการใช้งาน ติดต่อ HR":"ลงทะเบียนเรียบร้อยแล้ว เมื่อ HR อนุมัติจะใช้งานได้ทันที"),h("button",{class:"btn ghost",onclick:loadMe},"ตรวจสอบอีกครั้ง")))}
-  const tabs=[["punch","ลงเวลา"],["leave","ลางาน"],["history","ของฉัน"]];if(m.isSup)tabs.push(["team","ทีมของฉัน"]);
+  const tabs=[["punch","ลงเวลา"],["leave","ลางาน"],["history","ประวัติของฉัน"]];if(m.isSup)tabs.push(["team","ทีมของฉัน"]);
   if(!tabs.some(t=>t[0]===S.page))S.page="punch";
   $nav.hidden=false;$nav.replaceChildren(...tabs.map(([k,l])=>h("button",{"aria-current":S.page===k?"page":null,onclick:()=>go(k)},l)));
   const view=S.page==="punch"?vPunch():S.page==="leave"?vLeave():S.page==="history"?vHist():vTeam();
@@ -180,7 +180,7 @@ function vLeave(){
     lf.start?h("div",{class:"small muted"},`รวม ${days} วันทำงาน (ไม่นับวันอาทิตย์และวันหยุดบริษัท)`):null,
     h("button",{class:"btn",type:"submit",disabled:S.busy},S.busy?"กำลังส่ง…":"ส่งคำขอลา"));
   return h("div",null,h("h2",{style:"margin-top:0"},"ขอลางาน"),S.msg?h("p",{class:S.msgErr?"err":"",role:"status"},S.msg):null,f,
-    h("p",{class:"small muted"},"ดูวันลาคงเหลือและสถานะใบลาได้ที่แท็บ \"ของฉัน\""));
+    h("p",{class:"small muted"},"ดูวันลาคงเหลือและสถานะใบลาได้ที่แท็บ \"ประวัติของฉัน\""));
 }
 
 function balView(bal){return h("div",{class:"bal"},bal.filter(b=>b.quota||b.used||b.pending).map(b=>h("div",{class:"panel"},
